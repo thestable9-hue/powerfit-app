@@ -1,0 +1,19 @@
+{
+  "name": "PowerFit - Gestão de Treinos",
+  "short_name": "PowerFit",
+  "description": "Plataforma completa para personal trainers gerenciarem treinos e alunos acompanharem sua evolução.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B1120",
+  "theme_color": "#FF6B35",
+  "orientation": "portrait-primary",
+  "categories": ["fitness", "health", "lifestyle"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
