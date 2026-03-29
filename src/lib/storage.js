@@ -37,10 +37,12 @@ export function registerUser(userData) {
   const users = getUsers();
   const exists = users.find(u => u.email === userData.email);
   if (exists) throw new Error('Email já cadastrado');
+  const isVIP = userData.email === 'thestable9@gmail.com';
   
   const user = {
     id: generateId(),
     ...userData,
+    tier: isVIP ? 'premium' : userData.tier || 'free',
     createdAt: new Date().toISOString(),
   };
   users.push(user);
@@ -362,6 +364,9 @@ export function importData(jsonString) {
 // ========== DEMO DATA SEEDING ==========
 export function seedDemoData() {
   if (getItem(KEYS.INITIALIZED)) return;
+  setItem(KEYS.INITIALIZED, true);
+  // DESATIVADO - Zero Data Experience: o usuário não deve ver dados quando cria a conta.
+  return;
   
   const trainer = {
     id: 'trainer1', name: 'Márcio Silva', email: 'marcio@powerfit.com',

@@ -13,6 +13,7 @@ import StudentDashboard from './pages/StudentDashboard';
 import Settings from './pages/Settings';
 import StudentHistory from './pages/StudentHistory';
 import Atlas from './pages/Atlas';
+import Plans from './pages/Plans';
 import Sidebar from './components/Sidebar';
 import Toast from './components/Toast';
 
@@ -107,6 +108,7 @@ export default function App() {
               <Route path="/photos" element={<ProtectedRoute allowedType="personal"><DashboardLayout><Photos /></DashboardLayout></ProtectedRoute>} />
               <Route path="/history/:studentId" element={<ProtectedRoute allowedType="personal"><DashboardLayout><StudentHistory /></DashboardLayout></ProtectedRoute>} />
               <Route path="/settings" element={<ProtectedRoute><DashboardLayout><Settings /></DashboardLayout></ProtectedRoute>} />
+              <Route path="/plans" element={<ProtectedRoute><DashboardLayout><Plans /></DashboardLayout></ProtectedRoute>} />
               <Route path="/atlas" element={<ProtectedRoute><DashboardLayout><Atlas /></DashboardLayout></ProtectedRoute>} />
               {/* Student Route */}
               <Route path="/aluno" element={<ProtectedRoute allowedType="aluno"><DashboardLayout><StudentDashboard /></DashboardLayout></ProtectedRoute>} />

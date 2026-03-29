@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth, useTheme } from '../App';
-import { LayoutDashboard, Users, Dumbbell, TrendingUp, LogOut, X, Zap, CalendarDays, Camera, Settings, Moon, Sun, History, Sparkles } from 'lucide-react';
+import { LayoutDashboard, Users, Dumbbell, TrendingUp, LogOut, X, Zap, CalendarDays, Camera, Settings, Moon, Sun, History, Sparkles, CreditCard } from 'lucide-react';
 
 export default function Sidebar({ open, onClose }) {
   const { user, logout } = useAuth();
@@ -17,12 +17,14 @@ export default function Sidebar({ open, onClose }) {
     { path: '/schedule', label: 'Agenda', icon: CalendarDays },
     { path: '/photos', label: 'Fotos', icon: Camera },
     { path: '/atlas', label: 'Atlas Muscular', icon: Sparkles, pro: true },
+    { path: '/plans', label: 'Assinatura', icon: CreditCard },
     { path: '/settings', label: 'Configurações', icon: Settings },
   ];
 
   const studentNavItems = [
     { path: '/aluno', label: 'Meu Painel', icon: LayoutDashboard },
     { path: '/atlas', label: 'Atlas Muscular', icon: Sparkles, pro: true },
+    { path: '/plans', label: 'Assinatura', icon: CreditCard },
     { path: '/settings', label: 'Configurações', icon: Settings },
   ];
 

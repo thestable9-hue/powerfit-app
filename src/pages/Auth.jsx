@@ -30,15 +30,33 @@ export default function Auth({ onLogin }) {
   const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
+
+    // E-mail validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(registerForm.email)) {
+      setError('Por favor, informe um email válido.');
+      return;
+    }
+
+    // Phone validation
+    const cleanPhone = registerForm.phone ? registerForm.phone.replace(/[\s\-\(\)]/g, '') : '';
+    if (cleanPhone) {
+       const digitsOnly = /^\d+$/;
+       if (!digitsOnly.test(cleanPhone)) {
+         setError('O telefone deve conter apenas números válidos.');
+         return;
+       }
+    }
+
     if (!registerForm.name || !registerForm.email || !registerForm.password) {
       setError('Preencha todos os campos obrigatórios');
       return;
     }
     setLoading(true);
     try {
-      const user = registerUser(registerForm);
+      const user = registerUser({...registerForm, phone: cleanPhone});
       onLogin(user);
-      navigate('/dashboard');
+      navigate(user.type === 'aluno' ? '/aluno' : '/dashboard');
     } catch (err) {
       setError(err.message);
     }
@@ -105,6 +123,20 @@ export default function Auth({ onLogin }) {
           </form>
         ) : (
           <form onSubmit={handleRegister}>
+            <div className="form-group">
+              <label className="form-label">Tipo de Conta *</label>
+              <div style={{ display: 'flex', gap: '20px', marginBottom: '8px', padding: '10px 0' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.9rem' }}>
+                  <input type="radio" name="accountType" value="personal" checked={registerForm.type === 'personal'} onChange={() => setRegisterForm({...registerForm, type: 'personal'})} style={{ accentColor: 'var(--primary)' }} />
+                  🏋️ Personal Trainer
+                </label>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.9rem' }}>
+                  <input type="radio" name="accountType" value="aluno" checked={registerForm.type === 'aluno'} onChange={() => setRegisterForm({...registerForm, type: 'aluno'})} style={{ accentColor: 'var(--primary)' }} />
+                  🏃 Aluno
+                </label>
+              </div>
+            </div>
+
             <div className="form-group">
               <label className="form-label">Nome Completo *</label>
               <div className="input-icon-wrapper">
